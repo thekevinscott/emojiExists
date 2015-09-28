@@ -2,6 +2,17 @@
 
 This is a function that checks to see whether a string contains *all* emoji or not.
 
+## Installing
+
+*NPM*
+```
+npm install emoji-exists
+```
+
+## Using
+
+*From Node*
+
 ```
 var emojiExists = require('emojiExists');
 
@@ -13,3 +24,4 @@ emojiExists('foo😀');
 
 emojiExists('😀');
 >> true 
+```
