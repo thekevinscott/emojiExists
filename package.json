@@ -1,6 +1,6 @@
 {
   "name": "emoji-exists",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,9 @@
   "devDependencies": {
     "chai": "^3.3.0",
     "mocha": "^2.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scottlabs/emojiExists"
   }
 }
