@@ -24,40 +24,44 @@ describe('Parsing emoji', function() {
     emojiExists('foo😀').should.equal(false);
   });
 
-  describe('Valid emoji', function() {
-    this.timeout(20000);
+  describe.only('Valid emoji', function() {
     // this is a list of phrases known to give trouble
     var troublePhrases = [
-      //'😀',
-      //'💩',
+
+      '😀',
+      '😀😀',
+      '😀😀😀',
+      '💩',
 
       // good hourglass
-      //'⌛',
+      '⌛',
       // bad hourglass,
       '⌛️',
 
-      //'⏳',
-      //'⏳⌛️',
-      //'⏳⌛️🔙',
-      //'⌛️',
-      //'🇨🇳',
-      //'🀄'
+      '⏳',
+      '⏳⌛️',
+      '⏳⌛️🔙',
+      '⌛️',
+      '🇨🇳',
+      '🀄',
+
+      '©',
+      '®',
+      '8️⃣',
     ];
 
-    /*
-       it('should check all emoji', function() {
-       EmojiData.all().map(function(emoji) {
-       var unified = EmojiData.unified_to_char(emoji.unified);
-    //console.log('code point: ', unified, unified.codePointAt(0));
-    try {
-    emojiExists(unified).should.equal(true);
-    } catch(e) {
-    console.log('emoji failed:', unified);
-    throw e;
-    }
+    EmojiData.all().map(function(emoji) {
+      it('should check phrase: '+emoji, function() {
+        var unified = EmojiData.unified_to_char(emoji.unified);
+        //console.log('code point: ', unified, unified.codePointAt(0));
+        try {
+          emojiExists(unified).should.equal(true);
+        } catch(e) {
+          console.log('emoji failed:', unified);
+          throw e;
+        }
+      });
     });
-    });
-    */
 
     troublePhrases.map(function(emoji) {
       it('should check phrase: '+emoji, function() {
