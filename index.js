@@ -13,7 +13,7 @@ module.exports = function(str) {
   return nonEmojiExists(str);
 };
 
-var possible_codepoints_length = 3;
+var possible_surrogate_length = 3;
 
 /*
  * This function should take an incoming
@@ -37,30 +37,33 @@ function pad(str) {
 }
 
 /* This function takes an incoming
- * string and returns an array containing
- * each text element
+ * string and returns a boolean indicating
+ * whether the string consists entirely of
+ * emojis or not
  */
 function nonEmojiExists(str) {
   var symbols = splitString(str);
-  // for an index n within symbols,
-  // check if [n, n+1, n+2] exists in the codepoints
-  // array. if so, remove those three elements from symbols
-  // and proceed.
-  // otherwise, check if [n, n+1] exists in codepoints.
-  // if so, remove those two elements from symbols and proceed.
-  // else, check if [n] exists in the codepoints.
-  // if so, remove the element n from symbols and proceed.
-  // else, return false.
   while(symbols.length) {
-    if (emojiMarks.indexOf(symbols.slice(0,3).join('-')) !== -1) {
-      symbols.splice(0, 3);
-    } else if (emojiMarks.indexOf(symbols.slice(0,2).join('-')) !== -1) {
-      symbols.splice(0, 2);
-    } else if (emojiMarks.indexOf(symbols.slice(0,1).join('-')) !== -1) {
-      symbols.splice(0, 1);
+    var surrogateLength = getSurrogateLength(symbols);
+    if (surrogateLength) {
+      symbols.splice(0, surrogateLength);
     } else {
       return false;
     }
   }
   return true;
+}
+
+function checkEmoji(pairs) {
+  return emojiMarks.indexOf(pairs.join('-')) !== -1;
+}
+
+function getSurrogateLength(symbols) {
+  for (var i=0; i<possible_surrogate_length; i++) {
+    var len = possible_surrogate_length-i;
+    if (checkEmoji(symbols.slice(0,len))) {
+      return len;
+    }
+  }
+  return false;
 }

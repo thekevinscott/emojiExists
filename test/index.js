@@ -24,7 +24,7 @@ describe('Parsing emoji', function() {
     emojiExists('foo😀').should.equal(false);
   });
 
-  describe.only('Valid emoji', function() {
+  describe('Valid emoji', function() {
     // this is a list of phrases known to give trouble
     var troublePhrases = [
 
