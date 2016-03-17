@@ -1,2 +1,3 @@
 .jshintrc
+.eslintrc
 node_modules

@@ -1,10 +1,30 @@
 'use strict';
-var EmojiData = require('emoji-data');
+//var EmojiData = require('emoji-data');
 var punycode = require('punycode');
 
-var emojiMarks = EmojiData.codepoints({
-  include_variants: true
-});
+//var emojiMarks = EmojiData.codepoints({
+  //include_variants: true
+//});
+
+var possible_surrogate_length = 8;
+
+var emojiMarks = require('./vendor/emoji.json').map(function(emoji) {
+  //if (emoji.name === 'KEYCAP 8') {
+  var codepoint = emoji.unified;
+  var emojis = [codepoint];
+  var surrogate_length = codepoint.split('-').length;
+  if ( surrogate_length > possible_surrogate_length ) {
+    possible_surrogate_length = surrogate_length;
+  }
+
+  return emojis.concat(emoji.variations);
+  //}
+}).filter(function(el) {
+  return el;
+}).reduce(function(arr, els) {
+  return arr.concat(els);
+}, []);
+
 
 module.exports = function(str) {
   if (str === '') {
@@ -12,8 +32,6 @@ module.exports = function(str) {
   }
   return nonEmojiExists(str);
 };
-
-var possible_surrogate_length = 3;
 
 /*
  * This function should take an incoming
@@ -59,8 +77,12 @@ function checkEmoji(pairs) {
 }
 
 function getSurrogateLength(symbols) {
-  for (var i=0; i<possible_surrogate_length; i++) {
-    var len = possible_surrogate_length-i;
+  var iterator = possible_surrogate_length;
+  if ( symbols.length < possible_surrogate_length ) {
+    iterator = symbols.length;
+  }
+  for (var i=0; i< iterator; i++) {
+    var len = iterator-i;
     if (checkEmoji(symbols.slice(0,len))) {
       return len;
     }
