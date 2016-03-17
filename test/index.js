@@ -28,7 +28,6 @@ describe('Parsing emoji', function() {
     // this is a list of phrases known to give trouble
     var troublePhrases = [
 
-      /*
       '😀',
       '😀😀',
       '😀😀😀',
@@ -51,7 +50,6 @@ describe('Parsing emoji', function() {
       '8️⃣',
       '🗣',
       '🌮'
-      */
 
     ];
 
@@ -74,5 +72,46 @@ describe('Parsing emoji', function() {
       });
     });
 
+  });
+});
+
+describe('Getting number of emoji', function() {
+  describe('Old emoji', function() {
+    var emoji = '😀';
+    it('should get 0 emoji for 0 emojis', function() {
+      emojiExists.number('').should.equal(0);
+    });
+
+    it('should get 1 emoji for 1 emoji', function() {
+      emojiExists.number(emoji).should.equal(1);
+    });
+
+    it('should get 2 emoji for 2 emojis', function() {
+      emojiExists.number(emoji + emoji).should.equal(2);
+    });
+  });
+
+  describe('New emoji', function() {
+    var emoji = '🌮';
+
+    it('should get 1 emoji for 1 emoji', function() {
+      emojiExists.number(emoji).should.equal(1);
+    });
+
+    it('should get 2 emoji for 2 emojis', function() {
+      emojiExists.number(emoji + emoji).should.equal(2);
+    });
+
+    it('should get 3 pizza', function() {
+      emojiExists.number('🍕🍕🍕').should.equal(3);
+    });
+  });
+
+  describe('Skin color', function() {
+    var emoji = '👍🏿';
+
+    it('should get 1 emoji for 1 emojis', function() {
+      emojiExists.number(emoji).should.equal(1);
+    });
   });
 });

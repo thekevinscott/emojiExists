@@ -89,3 +89,18 @@ function getSurrogateLength(symbols) {
   }
   return false;
 }
+
+module.exports.number = function(str) {
+  var symbols = splitString(str);
+  var emojis = [];
+
+  while(symbols.length) {
+    for ( var i=0; i<symbols.length;i++) {
+      if (checkEmoji(symbols.slice(symbols.length - 1 - i))) {
+        emojis.push(symbols.splice(symbols.length - 1 - i).pop());
+        break;
+      }
+    }
+  }
+  return emojis.length;
+};
