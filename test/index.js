@@ -76,6 +76,10 @@ describe('Parsing emoji', function() {
 });
 
 describe('Getting number of emoji', function() {
+  it('should get 0 emoji for a string', function() {
+    emojiExists.number('foo').should.equal(0);
+  });
+
   describe('Old emoji', function() {
     var emoji = '😀';
     it('should get 0 emoji for 0 emojis', function() {
@@ -89,6 +93,10 @@ describe('Getting number of emoji', function() {
     it('should get 2 emoji for 2 emojis', function() {
       emojiExists.number(emoji + emoji).should.equal(2);
     });
+
+    it('should get 3 emoji for 3 emojis', function() {
+      emojiExists.number(emoji + emoji + emoji).should.equal(3);
+    });
   });
 
   describe('New emoji', function() {
@@ -100,6 +108,10 @@ describe('Getting number of emoji', function() {
 
     it('should get 2 emoji for 2 emojis', function() {
       emojiExists.number(emoji + emoji).should.equal(2);
+    });
+
+    it('should get 3 emoji for 3 emojis', function() {
+      emojiExists.number(emoji + emoji + emoji).should.equal(3);
     });
 
     it('should get 3 pizza', function() {

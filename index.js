@@ -90,17 +90,34 @@ function getSurrogateLength(symbols) {
   return false;
 }
 
-module.exports.number = function(str) {
-  var symbols = splitString(str);
+function getEmojiArray(symbols) {
   var emojis = [];
 
-  while(symbols.length) {
-    for ( var i=0; i<symbols.length;i++) {
-      if (checkEmoji(symbols.slice(symbols.length - 1 - i))) {
-        emojis.push(symbols.splice(symbols.length - 1 - i).pop());
-        break;
-      }
+  let found_emoji = false;
+  for ( var i=0; i<symbols.length;i++) {
+    if (checkEmoji(symbols.slice(symbols.length - 1 - i))) {
+      found_emoji = true;
+      const emoji_symbols = symbols.splice(symbols.length - 1 - i);
+      emojis.push(emoji_symbols);
+      break;
     }
   }
-  return emojis.length;
+
+  if ( ! found_emoji ) {
+    // invalid emoji
+    symbols.pop();
+  }
+
+  if ( symbols.length ) {
+    return getEmojiArray(symbols).concat(emojis);
+  } else {
+    return emojis;
+  }
+}
+
+function number(str) {
+  var symbols = splitString(str);
+  return getEmojiArray(symbols).length;
 };
+
+module.exports.number = number;
