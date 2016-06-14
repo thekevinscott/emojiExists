@@ -98,6 +98,15 @@ describe('Getting number of emoji', function() {
     it('should get 3 emoji for 3 emojis', function() {
       emojiExists.number(emoji + emoji + emoji).should.equal(3);
     });
+
+    it('should get 1 emoji for a mixed string and emoji', function() {
+      emojiExists.number('foo' + emoji).should.equal(1);
+    });
+
+    it('should get 2 emoji for a mixed string and 2 emoji', function() {
+      emojiExists.number(emoji + 'foo' + emoji).should.equal(2);
+    });
+
   });
 
   describe('New emoji', function() {
