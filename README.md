@@ -14,7 +14,7 @@ npm install emoji-exists
 *From Node*
 
 ```
-var emojiExists = require('emojiExists');
+var emojiExists = require('emoji-exists');
 
 emojiExists('foo');
 >> false
@@ -23,5 +23,8 @@ emojiExists('foo😀');
 >> false
 
 emojiExists('😀');
->> true 
+>> true
+
+emojiExists('😀🎉');
+>> true
 ```
