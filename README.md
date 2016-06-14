@@ -27,4 +27,13 @@ emojiExists('😀');
 
 emojiExists('😀🎉');
 >> true
+
+emojiExists.number('😀');
+>> 1
+
+emojiExists.number('🍕🍕🍕');
+>> 3
+
+emojiExists.number('EAT MY 🍕');
+>> 1
 ```
