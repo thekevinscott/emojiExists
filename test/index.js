@@ -120,11 +120,11 @@ describe('Getting number of emoji', function() {
     });
   });
 
-  //describe('Skin color', function() {
-    //var emoji = '👍🏿';
+  describe('Skin color', function() {
+    var emoji = '👍🏿';
 
-    //it('should get 1 emoji for 1 emojis', function() {
-      //emojiExists.number(emoji).should.equal(1);
-    //});
-  //});
+    it.only('should get 1 emoji for 1 emojis', function() {
+      emojiExists.number(emoji).should.equal(1);
+    });
+  });
 });
