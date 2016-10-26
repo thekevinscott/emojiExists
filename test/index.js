@@ -61,7 +61,6 @@ describe('Parsing emoji', function() {
     ];
 
     EmojiData.all().slice(10, 12).map(function(emoji) {
-      emoji = '↙️';
       it.only('should check phrase: '+emoji, function() {
         //var unified = emoji;
         emojiExists(emoji).should.equal(true);
