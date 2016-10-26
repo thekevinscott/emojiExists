@@ -28,6 +28,7 @@ describe('Parsing emoji', function() {
     // this is a list of phrases known to give trouble
     var troublePhrases = [
 
+      /*
       '😀',
       '😀😀',
       '😀😀😀',
@@ -50,8 +51,13 @@ describe('Parsing emoji', function() {
       '8️⃣',
       '🗣',
       '🌮',
-      '🌯'
+      '🌯',
+      */
+      '🌈',
 
+      '🕵️🏽‍♀️',
+      //'🕵️‍♀️',
+      //'🥗', // salad
     ];
 
     EmojiData.all().map(function(emoji) {
@@ -68,8 +74,9 @@ describe('Parsing emoji', function() {
     });
 
     troublePhrases.map(function(emoji) {
-      it('should check phrase: '+emoji, function() {
+      it.only('should check phrase: '+emoji, function() {
         emojiExists(emoji).should.equal(true);
+        emojiExists.number(emoji).should.equal(1);
       });
     });
 
@@ -123,7 +130,7 @@ describe('Getting number of emoji', function() {
   describe('Skin color', function() {
     var emoji = '👍🏿';
 
-    it.only('should get 1 emoji for 1 emojis', function() {
+    it('should get 1 emoji for 1 emojis', function() {
       emojiExists.number(emoji).should.equal(1);
     });
   });
