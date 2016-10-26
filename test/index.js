@@ -60,21 +60,24 @@ describe('Parsing emoji', function() {
       //'🥗', // salad
     ];
 
-    EmojiData.all().map(function(emoji) {
-      it('should check phrase: '+emoji, function() {
-        var unified = EmojiData.unified_to_char(emoji.unified);
+    EmojiData.all().slice(10, 12).map(function(emoji) {
+      emoji = '↙️';
+      it.only('should check phrase: '+emoji, function() {
+        //var unified = emoji;
+        emojiExists(emoji).should.equal(true);
+        //var unified = EmojiData.unified_to_char(emoji.unified);
         //console.log('code point: ', unified, unified.codePointAt(0));
-        try {
-          emojiExists(unified).should.equal(true);
-        } catch(e) {
-          console.log('emoji failed:', unified);
-          throw e;
-        }
+        //try {
+          //emojiExists(unified).should.equal(true);
+        //} catch(e) {
+          //console.log('emoji failed:', unified);
+          //throw e;
+        //}
       });
     });
 
     troublePhrases.map(function(emoji) {
-      it.only('should check phrase: '+emoji, function() {
+      it('should check phrase: '+emoji, function() {
         emojiExists(emoji).should.equal(true);
         emojiExists.number(emoji).should.equal(1);
       });
