@@ -28,6 +28,7 @@ describe('Parsing emoji', function() {
     // this is a list of phrases known to give trouble
     var troublePhrases = [
 
+      /*
       '😀',
       '😀😀',
       '😀😀😀',
@@ -50,26 +51,29 @@ describe('Parsing emoji', function() {
       '8️⃣',
       '🗣',
       '🌮',
-      '🌯'
+      '🌯',
+      */
+      '🌈',
 
+      '🕵️🏽‍♀️',
+      //'🕵️‍♀️',
+      //'🥗', // salad
     ];
 
-    EmojiData.all().map(function(emoji) {
-      it('should check phrase: '+emoji, function() {
+    describe('All Emojis', function() {
+      EmojiData.all().map(function(emoji) {
         var unified = EmojiData.unified_to_char(emoji.unified);
-        //console.log('code point: ', unified, unified.codePointAt(0));
-        try {
+        console.log(unified);
+        it('should check phrase: '+unified, function() {
           emojiExists(unified).should.equal(true);
-        } catch(e) {
-          console.log('emoji failed:', unified);
-          throw e;
-        }
+        });
       });
     });
 
     troublePhrases.map(function(emoji) {
       it('should check phrase: '+emoji, function() {
         emojiExists(emoji).should.equal(true);
+        emojiExists.number(emoji).should.equal(1);
       });
     });
 
@@ -129,11 +133,11 @@ describe('Getting number of emoji', function() {
     });
   });
 
-  //describe('Skin color', function() {
-    //var emoji = '👍🏿';
+  describe('Skin color', function() {
+    var emoji = '👍🏿';
 
-    //it('should get 1 emoji for 1 emojis', function() {
-      //emojiExists.number(emoji).should.equal(1);
-    //});
-  //});
+    it('should get 1 emoji for 1 emojis', function() {
+      emojiExists.number(emoji).should.equal(1);
+    });
+  });
 });
