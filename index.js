@@ -7,8 +7,6 @@ module.exports = function emojiExists(str) {
 
   const parsed = emojiTree(str);
 
-  console.log(parsed);
-
   for (var i = 0; i < parsed.length; i++) {
     if (parsed[i].type !== 'emoji') {
       return false;

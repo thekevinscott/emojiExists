@@ -60,18 +60,13 @@ describe('Parsing emoji', function() {
       //'🥗', // salad
     ];
 
-    EmojiData.all().slice(10, 12).map(function(emoji) {
-      it.only('should check phrase: '+emoji, function() {
-        //var unified = emoji;
-        emojiExists(emoji).should.equal(true);
-        //var unified = EmojiData.unified_to_char(emoji.unified);
-        //console.log('code point: ', unified, unified.codePointAt(0));
-        //try {
-          //emojiExists(unified).should.equal(true);
-        //} catch(e) {
-          //console.log('emoji failed:', unified);
-          //throw e;
-        //}
+    describe('All Emojis', function() {
+      EmojiData.all().map(function(emoji) {
+        var unified = EmojiData.unified_to_char(emoji.unified);
+        console.log(unified);
+        it('should check phrase: '+unified, function() {
+          emojiExists(unified).should.equal(true);
+        });
       });
     });
 
